@@ -21,12 +21,14 @@ resume_bp = Blueprint(
 UPLOAD_FOLDER = "static/uploads"
 ALLOWED_EXTENSIONS = {"pdf"}
 
+
 def allowed_file(filename):
 
     return "." in filename and \
            filename.rsplit(
-               ".",1
+               ".", 1
            )[1].lower() in ALLOWED_EXTENSIONS
+
 
 @resume_bp.route(
     "/analyze",
@@ -49,9 +51,14 @@ def analyze():
     file = request.files["resume"]
 
     # GET JOB DESCRIPTION
-    job_description = request.form.get("job_description","")
+    job_description = request.form.get(
+        "job_description", ""
+    )
 
-    print("\nJOB DESCRIPTION RECEIVED:\n",job_description)
+    print(
+        "\nJOB DESCRIPTION RECEIVED:\n",
+        job_description
+    )
 
     # EMPTY FILE CHECK
     if file.filename == "":
@@ -96,7 +103,7 @@ def analyze():
     ats_result = None
 
     if job_description.strip():
-        
+
         ats_result = calculate_ats_score(
             result["raw_text"],
             job_description
@@ -125,18 +132,23 @@ def analyze():
         result["role"],
         result["skills"],
         result["suggestions"],
-        result["ai_feedback"]
+        result["ai_feedback"],
+        ats_result=ats_result
     )
 
     # SHOW RESULT PAGE
     return render_template(
+
         "result.html",
+
         skills=result["skills"],
+
         categorized_skills=result[
             "categorized_skills"
         ],
 
         score=result["score"],
+
         suggestions=result[
             "suggestions"
         ],
@@ -150,8 +162,10 @@ def analyze():
         ],
 
         report_path=report_path,
+
         ai_feedback=result[
             "ai_feedback"
         ],
+
         ats_result=ats_result
     )

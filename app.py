@@ -10,24 +10,22 @@ from routes.auth_routes import auth_bp
 
 from models.database import init_db
 
-# Load environment variables
 load_dotenv()
 
 app = Flask(__name__)
 
-# Secret Key from .env
-app.secret_key = os.getenv("SECRET_KEY")
+app.secret_key = os.getenv(
+    "SECRET_KEY",
+    "resume_analyzer_secret_key_123"
+)
 
-# Initialize Database
 init_db()
 
-# Register Blueprints
 app.register_blueprint(main_bp)
 app.register_blueprint(resume_bp)
 app.register_blueprint(history_bp)
 app.register_blueprint(dashboard_bp)
 app.register_blueprint(auth_bp)
 
-# Run App
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

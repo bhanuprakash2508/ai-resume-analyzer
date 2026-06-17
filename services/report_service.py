@@ -10,6 +10,7 @@ from reportlab.platypus.tables import Table
 from reportlab.platypus.tables import TableStyle
 from reportlab.lib import colors
 
+
 def generate_pdf_report(
     filename,
     ats_score,
@@ -17,7 +18,8 @@ def generate_pdf_report(
     found_skills,
     suggestions,
     ai_feedback=None,
-    chart_path=None
+    chart_path=None,
+    ats_result=None
 ):
 
     base_name = os.path.splitext(filename)[0]
@@ -37,9 +39,11 @@ def generate_pdf_report(
     styles = getSampleStyleSheet()
 
     elements = []
+
     elements.append(
         Paragraph(
-            "AI Resume Analysis Report", styles["Title"]
+            "AI Resume Analysis Report",
+            styles["Title"]
         )
     )
 
@@ -66,7 +70,9 @@ def generate_pdf_report(
     )
 
     elements.append(table)
+
     elements.append(Spacer(1,20))
+
     elements.append(
         Paragraph(
             "<b>Detected Skills</b>",
@@ -81,7 +87,61 @@ def generate_pdf_report(
         )
     )
 
+    # NEW ATS/JOB DESCRIPTION MATCH SECTION
+    if ats_result:
+
+        elements.append(Spacer(1,20))
+
+        elements.append(
+            Paragraph(
+                "<b>Job Description Match Analysis</b>",
+                styles["Heading2"]
+            )
+        )
+
+        elements.append(
+            Paragraph(
+                f"Match Score: {ats_result['ats_score']}%",
+                styles["BodyText"]
+            )
+        )
+
+        elements.append(Spacer(1,10))
+
+        elements.append(
+            Paragraph(
+                "<b>Matched Skills</b>",
+                styles["BodyText"]
+            )
+        )
+
+        for skill in ats_result["matched_skills"]:
+            elements.append(
+                Paragraph(
+                    f"• {skill}",
+                    styles["BodyText"]
+                )
+            )
+
+        elements.append(Spacer(1,10))
+
+        elements.append(
+            Paragraph(
+                "<b>Missing Skills</b>",
+                styles["BodyText"]
+            )
+        )
+
+        for skill in ats_result["missing_skills"]:
+            elements.append(
+                Paragraph(
+                    f"• {skill}",
+                    styles["BodyText"]
+                )
+            )
+
     elements.append(Spacer(1,20))
+
     elements.append(
         Paragraph(
             "<b>Suggestions</b>",
@@ -98,6 +158,7 @@ def generate_pdf_report(
         )
 
     elements.append(Spacer(1,20))
+
     if ai_feedback:
 
         elements.append(
@@ -115,10 +176,10 @@ def generate_pdf_report(
         )
 
     if chart_path:
-        
-        elements.append(Spacer(1,20))
-        elements.append(
 
+        elements.append(Spacer(1,20))
+
+        elements.append(
             Image(chart_path, width=400, height=250)
         )
 

@@ -1,4 +1,6 @@
 from flask import Flask
+import os
+from dotenv import load_dotenv
 
 from routes.main_routes import main_bp
 from routes.resume_routes import resume_bp
@@ -8,21 +10,24 @@ from routes.auth_routes import auth_bp
 
 from models.database import init_db
 
+# Load environment variables
+load_dotenv()
+
 app = Flask(__name__)
 
-# SECRET KEY (SESSION)
-app.secret_key = "resume_analyzer_secret_key_123"
+# Secret Key from .env
+app.secret_key = os.getenv("SECRET_KEY")
 
-# INITIALIZE DATABASE
+# Initialize Database
 init_db()
 
-# REGISTER BLUEPRINTS
+# Register Blueprints
 app.register_blueprint(main_bp)
 app.register_blueprint(resume_bp)
 app.register_blueprint(history_bp)
 app.register_blueprint(dashboard_bp)
 app.register_blueprint(auth_bp)
 
-# RUN APP
+# Run App
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,7 +1,8 @@
 import sqlite3
+import os
 from datetime import datetime
 
-DB_NAME = "resume.db"
+DB_NAME = os.path.abspath("resume.db")
 
 # INIT DATABASE
 def init_db():

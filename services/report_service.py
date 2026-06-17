@@ -22,6 +22,8 @@ def generate_pdf_report(
 
     base_name = os.path.splitext(filename)[0]
 
+    os.makedirs("static/reports", exist_ok=True)
+
     report_path = os.path.join(
         "static",
         "reports",

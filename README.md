@@ -20,16 +20,16 @@ This project demonstrates a practical implementation of **Artificial Intelligenc
 
 ## Key Features
 
-✔ Secure User Authentication System
-✔ Resume PDF Upload and Parsing
-✔ NLP Based Skill Extraction
-✔ ATS Compatibility Score Calculation
-✔ Job Description Matching Engine
-✔ Machine Learning Career Role Prediction
-✔ AI Generated Career Feedback
-✔ Resume Analysis History Tracking
-✔ Dashboard Analytics with Visualization
-✔ PDF Report Generation
+* Secure User Authentication System
+* Resume PDF Upload and Parsing
+* NLP Based Skill Extraction
+* ATS Compatibility Score Calculation
+* Job Description Matching Engine
+* Machine Learning Career Role Prediction
+* AI Generated Career Feedback
+* Resume Analysis History Tracking
+* Dashboard Analytics with Visualization
+* PDF Report Generation
 
 ---
 
@@ -52,25 +52,27 @@ The system helps:
 
 ## System Workflow
 
+```text
 Resume Upload
-↓
+      ↓
 PDF Text Extraction
-↓
+      ↓
 Resume Text Preprocessing
-↓
+      ↓
 NLP Skill Extraction
-↓
+      ↓
 ATS Score Calculation
-↓
+      ↓
 Job Description Matching
-↓
+      ↓
 Machine Learning Role Prediction
-↓
+      ↓
 AI Career Feedback Generation
-↓
+      ↓
 Store Analysis History
-↓
+      ↓
 Generate PDF Report
+```
 
 ---
 
@@ -154,6 +156,7 @@ The system uses a supervised machine learning pipeline trained on resume dataset
 
 ## Project Structure
 
+```text
 AI_Resume_Analyzer/
 
 ├── app.py

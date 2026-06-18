@@ -1,78 +1,128 @@
-# AI Resume Analyzer with ATS & Career Prediction
+# AI Resume Analyzer with ATS, Career Prediction & Secure Authentication
 
 ![Project Preview](static/screenshots/home-page.png)
 
-An intelligent web application that leverages **Artificial Intelligence, Machine Learning, and Natural Language Processing (NLP)** to analyze resumes, calculate ATS compatibility scores, extract candidate skills, match job descriptions, predict suitable career roles, and provide personalized career insights.
+An intelligent full-stack web application that leverages **Artificial Intelligence, Machine Learning, and Natural Language Processing (NLP)** to analyze resumes, calculate ATS compatibility scores, extract technical skills, match job descriptions, predict suitable career roles, generate personalized career insights, and provide secure user account management.
 
 This project simulates modern **AI-powered recruitment automation systems** used by hiring platforms and HR technology companies.
 
 ---
 
+## Live Demo
+
+**Live Application**  
+https://ai-resume-analyzer-sg14.onrender.com
+
+---
+
 ## Project Overview
 
-Recruiters often receive hundreds or thousands of resumes for a single job opening. Manual resume screening is time-consuming and inefficient.
+Recruiters often receive hundreds or thousands of resumes for a single role. Manual screening is time-consuming and inefficient.
 
-**AI Resume Analyzer** automates this process by intelligently analyzing uploaded resumes, extracting technical skills, calculating ATS compatibility, matching resumes with job descriptions, predicting suitable career roles, and generating AI-driven feedback for career improvement.
+**AI Resume Analyzer** automates candidate evaluation by intelligently analyzing uploaded resumes, extracting technical skills, calculating ATS compatibility, matching resumes with job descriptions, predicting suitable career roles, generating AI-powered career recommendations, and securely managing user accounts.
 
-This project demonstrates a practical implementation of **Artificial Intelligence in Recruitment Technology (HR Tech)**.
+This project demonstrates practical implementation of **Artificial Intelligence in Recruitment Technology (HR Tech)**.
 
 ---
 
 ## Key Features
 
-* Secure User Authentication System
-* Resume PDF Upload and Parsing
-* NLP Based Skill Extraction
-* ATS Compatibility Score Calculation
-* Job Description Matching Engine
-* Machine Learning Career Role Prediction
-* AI Generated Career Feedback
-* Resume Analysis History Tracking
-* Dashboard Analytics with Visualization
-* PDF Report Generation
+* Secure User Authentication System  
+* User Registration and Login  
+* Forgot Password Reset System  
+* Permanent Account Deletion Feature  
+* Resume PDF Upload and Parsing  
+* NLP Based Skill Extraction  
+* ATS Compatibility Score Calculation  
+* Job Description Matching Engine  
+* Machine Learning Career Role Prediction  
+* AI Generated Career Feedback  
+* Resume Analysis History Tracking  
+* Dashboard Analytics with Visualization  
+* PDF Report Generation  
+* Cloud Deployment using Render  
 
 ---
 
 ## Why This Project?
 
-Traditional recruitment systems require recruiters to manually review thousands of resumes, making hiring inefficient.
+Traditional recruitment systems require recruiters to manually review large numbers of resumes, making hiring slow and inefficient.
 
 This project solves that problem by automating candidate evaluation through Artificial Intelligence.
 
 The system helps:
 
-* Automate resume screening
-* Improve ATS compatibility analysis
-* Match resumes against job descriptions
-* Predict suitable technical job roles
-* Provide intelligent resume improvement suggestions
-* Reduce recruiter screening effort
+* Automate resume screening  
+* Improve ATS compatibility analysis  
+* Match resumes against job descriptions  
+* Predict suitable technical job roles  
+* Provide intelligent resume improvement suggestions  
+* Reduce recruiter screening effort  
+* Deliver faster hiring workflows  
 
 ---
 
 ## System Workflow
 
 ```text
+User Registration / Login
+        ↓
 Resume Upload
-      ↓
+        ↓
 PDF Text Extraction
-      ↓
+        ↓
 Resume Text Preprocessing
-      ↓
+        ↓
 NLP Skill Extraction
-      ↓
+        ↓
 ATS Score Calculation
-      ↓
+        ↓
 Job Description Matching
-      ↓
+        ↓
 Machine Learning Role Prediction
-      ↓
+        ↓
 AI Career Feedback Generation
-      ↓
-Store Analysis History
-      ↓
+        ↓
 Generate PDF Report
+        ↓
+Store Resume History
+        ↓
+Dashboard Analytics
+        ↓
+Forgot Password / Delete Account Management
+````
+
+---
+
+## Authentication Workflow
+
+```text
+Register Account
+      ↓
+Login
+      ↓
+Analyze Resume
+      ↓
+View Dashboard + History
+      ↓
+Forgot Password (Reset Password)
+      ↓
+Delete Account (Permanent Removal)
+      ↓
+Register Again Using Same Email
 ```
+
+---
+
+## Security Features
+
+* Password Hashing using Werkzeug Security
+* Session Based Authentication
+* Secure Login Validation
+* Forgot Password Reset Workflow
+* Permanent Account Deletion System
+* Protected User Specific Resume History
+* User Data Isolation using Session Management
 
 ---
 
@@ -114,13 +164,15 @@ Generate PDF Report
 * Pandas
 * NumPy
 * Pickle
-* PyPDF Processing Libraries
+* PyPDF Libraries
+* ReportLab
+* Werkzeug Security
 
 ---
 
 ## Machine Learning Pipeline
 
-The system uses a supervised machine learning pipeline trained on resume datasets to predict suitable technical job roles.
+The system uses supervised machine learning trained on resume datasets to predict suitable technical career roles.
 
 ### Pipeline Steps
 
@@ -160,7 +212,6 @@ The system uses a supervised machine learning pipeline trained on resume dataset
 AI_Resume_Analyzer/
 
 ├── app.py
-├── config.py
 ├── requirements.txt
 ├── .gitignore
 │
@@ -174,16 +225,14 @@ AI_Resume_Analyzer/
 │   └── vectorizer.pkl
 │
 ├── models/
-│   ├── database.py
-│   └── __init__.py
+│   └── database.py
 │
 ├── routes/
 │   ├── auth_routes.py
 │   ├── dashboard_routes.py
 │   ├── history_routes.py
 │   ├── main_routes.py
-│   ├── resume_routes.py
-│   └── __init__.py
+│   └── resume_routes.py
 │
 ├── services/
 │   ├── ats_engine.py
@@ -191,12 +240,10 @@ AI_Resume_Analyzer/
 │   ├── jd_matcher.py
 │   ├── report_service.py
 │   ├── resume_service.py
-│   ├── skill_extractor.py
-│   └── __init__.py
+│   └── skill_extractor.py
 │
 ├── utils/
 │   ├── ai_feedback.py
-│   ├── ats_score.py
 │   ├── pdf_reader.py
 │   ├── role_predictor.py
 │   └── skill_extractor.py
@@ -204,6 +251,7 @@ AI_Resume_Analyzer/
 ├── templates/
 │   ├── login.html
 │   ├── register.html
+│   ├── forgot_password.html
 │   ├── index.html
 │   ├── result.html
 │   ├── dashboard.html
@@ -232,15 +280,23 @@ Secure authentication system for registered users.
 
 ### Registration Page
 
-New users can create an account to access the platform.
+Create a secure account before accessing resume analysis.
 
 ![Register Page](static/screenshots/register-page.png)
 
 ---
 
+### Forgot Password Page
+
+Users can securely reset their password.
+
+![Forgot Password](static/screenshots/forgot-password.png)
+
+---
+
 ### Home Page
 
-Main interface where users upload resume PDF and optionally provide job description for intelligent analysis.
+Upload resume and optionally provide job description for intelligent analysis.
 
 ![Home Page](static/screenshots/home-page.png)
 
@@ -248,15 +304,15 @@ Main interface where users upload resume PDF and optionally provide job descript
 
 ### Resume Analysis Result
 
-Displays complete resume evaluation including ATS score, role prediction, PDF report generation, and job match score.
+Displays ATS score, predicted role, PDF report generation, and job description matching.
 
 ![Analysis Result](static/screenshots/analysis-result.png)
 
 ---
 
-### ATS & Skills Analysis
+### ATS and Skills Analysis
 
-Shows detected technical skills extracted from resume and ATS compatibility evaluation.
+Displays extracted technical skills and ATS compatibility evaluation.
 
 ![ATS Analysis](static/screenshots/ats-analysis.png)
 
@@ -264,7 +320,7 @@ Shows detected technical skills extracted from resume and ATS compatibility eval
 
 ### AI Career Feedback
 
-Provides AI generated recommendations and personalized resume improvement suggestions.
+Provides intelligent career improvement suggestions.
 
 ![AI Feedback](static/screenshots/ai-feedback.png)
 
@@ -272,7 +328,7 @@ Provides AI generated recommendations and personalized resume improvement sugges
 
 ### Analytics Dashboard
 
-Displays resume analytics, ATS trends, role distribution, and performance insights.
+Displays ATS trends, role distribution, and analytics insights.
 
 ![Dashboard](static/screenshots/dashboard.png)
 
@@ -280,7 +336,7 @@ Displays resume analytics, ATS trends, role distribution, and performance insigh
 
 ### Analysis History
 
-Stores previous resume analysis records with ATS scores, predicted roles, and history management.
+Stores previous resume analysis records and user activity.
 
 ![History](static/screenshots/history-page.png)
 
@@ -291,7 +347,7 @@ Stores previous resume analysis records with ATS scores, predicted roles, and hi
 Clone repository
 
 ```bash
-git clone https://github.com/your-username/ai-resume-analyzer.git
+git clone https://github.com/bhanuprakash2508/ai-resume-analyzer.git
 ```
 
 Move into project folder
@@ -321,8 +377,8 @@ python app.py
 * Explainable AI Predictions
 * Deep Learning based Resume Classification
 * Recruiter Admin Dashboard
-* Cloud Deployment Support
 * Multi-language Resume Analysis
+* Resume Recommendations using Generative AI
 
 ---
 
@@ -352,3 +408,4 @@ LinkedIn: https://linkedin.com/in/bhanuprakash-chintha
 ## License
 
 Open source project developed for learning, research, and portfolio demonstration.
+

@@ -34,14 +34,17 @@ def init_db():
             REFERENCES users(id)
         )
     """)
+
     conn.commit()
     conn.close()
+
 
 # REGISTER USER
 def create_user(username, email, password):
 
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
+
     cursor.execute("""
 
         INSERT INTO users(
@@ -60,6 +63,7 @@ def create_user(username, email, password):
     conn.commit()
     conn.close()
 
+
 # FIND USER BY EMAIL
 def get_user_by_email(email):
 
@@ -67,14 +71,16 @@ def get_user_by_email(email):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT *FROM users
+        SELECT * FROM users
         WHERE email=?
     """, (email,))
 
     user = cursor.fetchone()
+
     conn.close()
 
     return user
+
 
 # SAVE RESUME
 def save_resume(user_id, filename, score, role, skills):
@@ -83,7 +89,7 @@ def save_resume(user_id, filename, score, role, skills):
     cursor = conn.cursor()
 
     cursor.execute("""
-                   
+
         INSERT INTO resumes(
             user_id,
             filename,
@@ -91,7 +97,7 @@ def save_resume(user_id, filename, score, role, skills):
             role,
             skills,
             created_at
-        )             
+        )
         VALUES (?, ?, ?, ?, ?, ?)
 
     """, (
@@ -100,7 +106,6 @@ def save_resume(user_id, filename, score, role, skills):
         filename,
         score,
         role,
-
         ", ".join(skills),
 
         datetime.now().strftime(
@@ -111,41 +116,51 @@ def save_resume(user_id, filename, score, role, skills):
     conn.commit()
     conn.close()
 
-# HISTORY (PER USER)
+
+# HISTORY
 def get_history(user_id):
 
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
 
     cursor.execute("""
-                   
-        SELECT id,filename,score,role,created_at
+
+        SELECT id, filename, score, role, created_at
         FROM resumes
         WHERE user_id=?
         ORDER BY id DESC
-                   
+
     """, (user_id,))
 
     records = cursor.fetchall()
+
     conn.close()
+
     return records
 
-# DASHBOARD (PER USER)
+
+# DASHBOARD
 def get_dashboard_data(user_id):
 
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
+
     cursor.execute("""
 
-        SELECT score,role FROM resumes
+        SELECT score, role
+        FROM resumes
         WHERE user_id=?
 
     """, (user_id,))
+
     data = cursor.fetchall()
+
     conn.close()
+
     return data
 
-# DELETE RESUME
+
+# DELETE SINGLE RESUME
 def delete_resume(resume_id, user_id):
 
     conn = sqlite3.connect(DB_NAME)
@@ -159,6 +174,52 @@ def delete_resume(resume_id, user_id):
     """, (
         resume_id,
         user_id
+    ))
+
+    conn.commit()
+    conn.close()
+
+
+# DELETE USER ACCOUNT
+def delete_user_account(user_id):
+
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+
+    # Delete resume history first
+    cursor.execute("""
+
+        DELETE FROM resumes
+        WHERE user_id=?
+
+    """, (user_id,))
+
+    # Delete user account
+    cursor.execute("""
+
+        DELETE FROM users
+        WHERE id=?
+
+    """, (user_id,))
+
+    conn.commit()
+    conn.close()
+
+# UPDATE PASSWORD
+def update_password(email, new_password):
+
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+
+        UPDATE users
+        SET password=?
+        WHERE email=?
+
+    """, (
+        new_password,
+        email
     ))
 
     conn.commit()

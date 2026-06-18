@@ -24,7 +24,6 @@
 <body>
 
 <!-- NAVBAR -->
-
 <nav class="navbar navbar-dark px-3">
 
     <a class="navbar-brand fw-bold" href="/">
@@ -32,7 +31,7 @@
         AI Resume Analyzer
     </a>
 
-        <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center">
 
         <span class="text-white me-3">
             Welcome {{ session.username }}
@@ -48,14 +47,21 @@
             Dashboard
         </a>
 
+        <!-- Logout -->
         <a href="/logout"
-        class="btn btn-danger">
+        class="btn btn-primary me-2">
             Logout
+        </a>
+
+        <!-- Delete Account -->
+        <a href="/delete-account"
+           onclick="return confirm('Are you sure? This will permanently delete your account and all resume history.')"
+           class="btn btn-outline-danger">
+            Delete Account
         </a>
 
     </div>
 </nav>
-
 
 
 <!-- MAIN -->
@@ -96,7 +102,7 @@
                    ">
                 </i>
 
-                <h4> Total Resumes </h4>
+                <h4>Total Resumes</h4>
 
                 <h2 class="mt-2 fw-bold text-info">
                     {{ total_resumes }}
@@ -171,6 +177,7 @@
 
         <div class="d-flex justify-content-between align-items-center mb-3">
             <div>
+
                 <h3 class="mb-1">
                     <i class="bi bi-pie-chart-fill"></i>
                     Role Distribution

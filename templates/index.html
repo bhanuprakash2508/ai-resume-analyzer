@@ -51,10 +51,19 @@
             Dashboard
         </a>
 
+        <!-- Logout -->
         <a href="/logout"
-        class="btn btn-danger btn-sm">
+        class="btn btn-primary btn-sm me-2">
             Logout
         </a>
+
+        <!-- Delete Account -->
+        <a href="/delete-account"
+           onclick="return confirm('Are you sure? This will permanently delete your account and all resume history.')"
+           class="btn btn-outline-danger btn-sm">
+            Delete Account
+        </a>
+
     </div>
 </nav>
 
